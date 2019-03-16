@@ -4,22 +4,24 @@
 #
 Name     : R-import
 Version  : 1.1.0
-Release  : 12
+Release  : 13
 URL      : https://cran.r-project.org/src/contrib/import_1.1.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/import_1.1.0.tar.gz
 Summary  : An Import Mechanism for R
 Group    : Development/Tools
 License  : MIT
-BuildRequires : clr-R-helpers
+Requires: R-markdown
+BuildRequires : R-markdown
+BuildRequires : buildreq-R
 
 %description
-objects from packages. The syntax allows for importing multiple objects
-  from a package with a single command in an expressive way. The import
-  package bridges some of the gap between using library (or require) and
-  direct (single-object) imports. Furthermore the imported objects are not
-  placed in the current environment. It is also possible to import
-  objects from stand-alone .R files. For more information, refer to
-  the package vignette.
+# An Import Mechanism For R
+# Motivation
+The typical way of using functionality exposed by a package in R scripts is to
+load (and attach) the entire package with `library` (or `require`). This can
+have the undesirable effect of masking objects in the user's search path
+and can also make it difficult and confusing to identify what functionality
+comes from which package when using several `library` statements.
 
 %prep
 %setup -q -c -n import
@@ -29,11 +31,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1523745930
+export SOURCE_DATE_EPOCH=1552771657
 
 %install
+export SOURCE_DATE_EPOCH=1552771657
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1523745930
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -68,8 +70,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library import|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  import || :
 
 
 %files

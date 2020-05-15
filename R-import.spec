@@ -4,42 +4,41 @@
 #
 Name     : R-import
 Version  : 1.1.0
-Release  : 22
+Release  : 23
 URL      : https://cran.r-project.org/src/contrib/import_1.1.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/import_1.1.0.tar.gz
 Summary  : An Import Mechanism for R
 Group    : Development/Tools
 License  : MIT
-BuildRequires : R-markdown
 BuildRequires : buildreq-R
-BuildRequires : util-linux
 
 %description
-# An Import Mechanism For R
-# Motivation
-The typical way of using functionality exposed by a package in R scripts is to
-load (and attach) the entire package with `library` (or `require`). This can
-have the undesirable effect of masking objects in the user's search path
-and can also make it difficult and confusing to identify what functionality
-comes from which package when using several `library` statements.
+objects from packages. The syntax allows for importing multiple objects
+  from a package with a single command in an expressive way. The import
+  package bridges some of the gap between using library (or require) and
+  direct (single-object) imports. Furthermore the imported objects are not
+  placed in the current environment. It is also possible to import
+  objects from stand-alone .R files. For more information, refer to
+  the package vignette.
 
 %prep
 %setup -q -c -n import
+cd %{_builddir}/import
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571847284
+export SOURCE_DATE_EPOCH=1589578346
 
 %install
-export SOURCE_DATE_EPOCH=1571847284
+export SOURCE_DATE_EPOCH=1589578346
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib

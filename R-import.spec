@@ -4,7 +4,7 @@
 #
 Name     : R-import
 Version  : 1.2.0
-Release  : 37
+Release  : 38
 URL      : https://cran.r-project.org/src/contrib/import_1.2.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/import_1.2.0.tar.gz
 Summary  : An Import Mechanism for R
